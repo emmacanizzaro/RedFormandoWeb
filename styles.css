@@ -163,7 +163,7 @@ body.modal-open {
 }
 
 .page-familia .content-home {
-  width: min(1320px, calc(100% - 30px));
+  width: min(1400px, calc(100% - 30px));
 }
 
 .page-recursos .content-home {
@@ -471,11 +471,26 @@ h2 {
   overflow: auto;
 }
 
+.congregaciones-box {
+  max-height: none;
+  align-self: start;
+}
+
+.congregaciones-box table {
+  font-size: 0.84rem;
+}
+
+.congregaciones-box th,
+.congregaciones-box td {
+  padding: 8px 9px;
+  line-height: 1.25;
+}
+
 .family-tables {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 26px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .family-tables .table-wrap,
@@ -496,9 +511,10 @@ h2 {
 }
 
 .workers-column {
-  display: grid;
-  gap: 18px;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: start;
 }
 
 .workers-table {
@@ -511,7 +527,8 @@ h2 {
 }
 
 .family-photo-frame {
-  min-height: 320px;
+  height: clamp(560px, 46vw, 780px);
+  margin-top: 0;
   position: relative;
   overflow: hidden;
   border-radius: 24px 24px 82px 24px;
@@ -527,7 +544,7 @@ h2 {
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center 24%;
+  object-position: center 50%;
 }
 
 table {
@@ -1105,6 +1122,10 @@ th {
 
   .family-tables {
     grid-template-columns: 1fr;
+  }
+
+  .family-photo-frame {
+    height: clamp(300px, 62vw, 460px);
   }
 
   .footer-grid {
