@@ -32,4 +32,33 @@ window.RED_CONFIG = {
     pdfUrl: "#",
     materialUrl: "#",
   },
+
+  eventsBoard: {
+    items: [
+      {
+        note: "Encuentro RedFormando 2026",
+        image: "assets/images/Encuentro RedFormando.png",
+        alt: "Banner Encuentro RedFormando",
+        ctaLabel: "Reservá tu lugar",
+        ctaLink: "#contacto",
+        ctaTarget: "_self",
+      },
+      {
+        note: "Campafuego 2026",
+        image: "assets/images/CNTN.png",
+        alt: "Banner Campafuego 2026",
+        ctaLabel: "Más info",
+        ctaLink: "recursos.html",
+        ctaTarget: "_blank",
+      },
+      {
+        note: "Cupos limitados, revisá la imagen",
+        image: "assets/images/EDMI.jpg",
+        alt: "Banner Encuentro de Familias",
+        ctaLabel: "Más info",
+        ctaLink: "familia.html",
+        ctaTarget: "_self",
+      },
+    ],
+  },
 };

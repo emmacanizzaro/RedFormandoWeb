@@ -49,6 +49,41 @@ function applyRuntimeConfig() {
   const cfg = window.RED_CONFIG;
   if (!cfg) return;
 
+  const eventsGrid = document.getElementById("events-grid");
+  if (eventsGrid && Array.isArray(cfg.eventsBoard?.items)) {
+    eventsGrid.innerHTML = "";
+
+    cfg.eventsBoard.items.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "event-card";
+
+      const note = document.createElement("p");
+      note.className = "event-note";
+      note.textContent = item.note || "Próximo evento";
+
+      const media = document.createElement("div");
+      media.className = "event-media";
+
+      const img = document.createElement("img");
+      img.src = item.image || "assets/images/img-home.svg";
+      img.alt = item.alt || "Banner del evento";
+
+      const cta = document.createElement("a");
+      cta.className = "event-link";
+      cta.href = item.ctaLink || "#contacto";
+      cta.textContent = item.ctaLabel || "Más info";
+      cta.target = item.ctaTarget || "_self";
+
+      if (cta.target === "_blank") {
+        cta.rel = "noopener noreferrer";
+      }
+
+      media.appendChild(img);
+      card.append(note, media, cta);
+      eventsGrid.appendChild(card);
+    });
+  }
+
   const nosotrosImg = document.getElementById("nosotros-image");
   if (nosotrosImg && cfg.nosotrosImage) {
     nosotrosImg.src = cfg.nosotrosImage;

@@ -190,6 +190,116 @@ body.modal-open {
   padding: 80px 38px;
 }
 
+.events-board-wrap {
+  margin: 0 0 46px;
+}
+
+.events-board {
+  border-radius: 26px;
+  padding: 26px;
+  border: 1px solid rgba(32, 14, 50, 0.12);
+  box-shadow: var(--shadow);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(26, 119, 111, 0.18), transparent 40%),
+    linear-gradient(
+      165deg,
+      rgba(23, 39, 89, 0.94),
+      rgba(23, 39, 89, 0.84) 60%,
+      rgba(26, 119, 111, 0.9)
+    );
+  color: #fff;
+}
+
+.events-board-head {
+  max-width: 720px;
+  margin-bottom: 18px;
+}
+
+.events-kicker {
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.events-board h2 {
+  margin: 6px 0 8px;
+  color: #fff;
+}
+
+.events-board-head p {
+  margin-bottom: 0;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.event-card {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(3px);
+  padding: 10px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.event-note {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.event-media {
+  margin: 0;
+  height: 230px;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.06)
+  );
+}
+
+.event-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.event-card .event-link {
+  margin-top: 0;
+  text-decoration: none;
+  font-weight: 800;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  padding: 10px 12px;
+  justify-self: stretch;
+  text-align: center;
+}
+
+.event-card .event-link:hover {
+  background: #fff;
+  color: var(--brand-blue);
+}
+
 .bienal-highlight {
   margin-top: 28px;
   padding: 22px;
@@ -1116,7 +1226,8 @@ th {
   .courses-grid,
   .external-sections,
   .donation-grid,
-  .download-boxes {
+  .download-boxes,
+  .events-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1166,9 +1277,21 @@ th {
   .product-carousel {
     grid-auto-columns: minmax(210px, 80vw);
   }
+
+  .event-media {
+    height: 210px;
+  }
 }
 
 @media (max-width: 520px) {
+  .events-board {
+    padding: 20px 14px;
+  }
+
+  .event-media {
+    height: 180px;
+  }
+
   .blog-grid {
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: 84px;
