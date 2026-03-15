@@ -4,6 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>REDFORMANDO | Recursos Libros</title>
+    <meta
+      name="description"
+      content="Recursos de libros y manuales digitales de Redformando para formación y crecimiento ministerial."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#172759" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src https://www.youtube.com https://youtube.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+    />
+    <link
+      rel="canonical"
+      href="https://www.redformando.com/recursos-libros.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="REDFORMANDO" />
+    <meta property="og:title" content="REDFORMANDO | Recursos Libros" />
+    <meta
+      property="og:description"
+      content="Catálogo de libros y manuales digitales con checkout por moneda."
+    />
+    <meta
+      property="og:url"
+      content="https://www.redformando.com/recursos-libros.html"
+    />
+    <meta
+      property="og:image"
+      content="https://www.redformando.com/assets/images/Redformando.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="REDFORMANDO | Recursos Libros" />
+    <meta
+      name="twitter:description"
+      content="Libros y manuales digitales para equipar y formar líderes."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.redformando.com/assets/images/Redformando.png"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -363,8 +404,7 @@
           <a class="btn-strong btn-donaciones" href="index.html#donaciones"
             >Ir a Donaciones</a
           >
-          <h4>Contacto</h4>
-          <p>Rio Grande, Tierra del Fuego, Argentina</p>
+          <p>REDFORMANDO | Familia Ministerial</p>
         </div>
         <div class="footer-col">
           <h4>Áreas Ministeriales</h4>
@@ -374,7 +414,6 @@
           </ul>
         </div>
       </div>
-      <p class="footer-copy">REDFORMANDO - Familia Ministerial</p>
     </footer>
 
     <aside
@@ -389,8 +428,76 @@
       </div>
       <ul id="cart-items"></ul>
       <p class="cart-total">Total: $ <span id="cart-total">0</span></p>
+      <button id="clear-cart" class="cart-clear-btn" type="button">
+        Vaciar carrito
+      </button>
+
+      <form id="checkout-form" class="checkout-form">
+        <h4>Datos para finalizar la compra</h4>
+        <p class="checkout-note">Los libros se entregan en formato digital.</p>
+        <label>
+          Nombre y apellido
+          <input
+            id="checkout-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            placeholder="Tu nombre"
+            required
+          />
+        </label>
+        <label>
+          WhatsApp
+          <input
+            id="checkout-phone"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            placeholder="Ej: 2964 123456"
+            required
+          />
+        </label>
+        <label>
+          Email de entrega
+          <input
+            id="checkout-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="tuemail@ejemplo.com"
+            required
+          />
+        </label>
+        <fieldset class="checkout-currency-group">
+          <legend>Moneda de pago</legend>
+          <label class="checkout-currency-option">
+            <input type="radio" name="checkout-currency" value="ars" checked />
+            Pesos argentinos ($)
+          </label>
+          <label class="checkout-currency-option">
+            <input type="radio" name="checkout-currency" value="usd" />
+            Dólares estadounidenses (u$d)
+          </label>
+        </fieldset>
+        <label>
+          Comentarios (opcional)
+          <textarea
+            id="checkout-notes"
+            name="notes"
+            rows="3"
+            placeholder="Escribí aquí cualquier detalle adicional"
+          ></textarea>
+        </label>
+
+        <div class="checkout-actions">
+          <button id="checkout-submit" class="btn-strong" type="submit">
+            Finalizar compra
+          </button>
+        </div>
+      </form>
     </aside>
 
+    <script src="config.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

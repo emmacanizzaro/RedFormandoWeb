@@ -18,10 +18,21 @@ window.RED_CONFIG = {
   ],
 
   courses: {
-    webinarForm: "#",
+    webinarForm: "https://www.instagram.com/webinar_redformando/",
     webinarImage: "assets/images/Webinar.jpg",
-    edmiForm: "#",
+    edmiForm: "https://www.instagram.com/edm.internacional/",
     edmiImage: "assets/images/EDMI.jpg",
+  },
+
+  checkout: {
+    paymentLinks: {
+      ars: "#",
+      usd: "#",
+    },
+    paymentProviders: {
+      ars: "Mercado Pago",
+      usd: "PayPal",
+    },
   },
 
   bienal: {

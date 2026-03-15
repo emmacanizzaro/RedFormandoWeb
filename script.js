@@ -6,9 +6,63 @@ const cartItemsList = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
 const cartCount = document.getElementById("cart-count");
 const cartPanel = document.getElementById("cart-panel");
+const clearCartButton = document.getElementById("clear-cart");
+const checkoutForm = document.getElementById("checkout-form");
+const checkoutName = document.getElementById("checkout-name");
+const checkoutPhone = document.getElementById("checkout-phone");
+const checkoutEmail = document.getElementById("checkout-email");
+const checkoutNotes = document.getElementById("checkout-notes");
+const checkoutCurrencyInputs = document.querySelectorAll(
+  'input[name="checkout-currency"]',
+);
+const checkoutSubmitButton = document.getElementById("checkout-submit");
 const productCarousel = document.getElementById("product-carousel");
 const carouselStatus = document.getElementById("carousel-status");
 const donationOpenIntentKey = "redformando:open-donaciones";
+const cartStorageKey = "redformando:cart";
+const checkoutStorageKey = "redformando:checkout";
+
+let checkoutConfig = {
+  paymentLinks: {
+    ars: "#",
+    usd: "#",
+  },
+  paymentProviders: {
+    ars: "Mercado Pago",
+    usd: "PayPal",
+  },
+};
+
+function getSelectedCurrency() {
+  const selected = Array.from(checkoutCurrencyInputs).find(
+    (input) => input.checked,
+  );
+  return selected?.value === "usd" ? "usd" : "ars";
+}
+
+function getCurrencyInfo(currency) {
+  if (currency === "usd") {
+    return {
+      code: "USD",
+      label: "u$d",
+      paymentLink: checkoutConfig.paymentLinks.usd || "#",
+      provider: checkoutConfig.paymentProviders.usd || "PayPal",
+    };
+  }
+
+  return {
+    code: "ARS",
+    label: "$",
+    paymentLink: checkoutConfig.paymentLinks.ars || "#",
+    provider: checkoutConfig.paymentProviders.ars || "Mercado Pago",
+  };
+}
+
+function updateCheckoutSubmitLabel() {
+  if (!checkoutSubmitButton) return;
+
+  checkoutSubmitButton.textContent = "Finalizar compra";
+}
 
 function setupDonationIntentTracking() {
   const donationButtons = document.querySelectorAll(".btn-donaciones");
@@ -163,6 +217,23 @@ function applyRuntimeConfig() {
   if (bienalMaterialLink && cfg.bienal?.materialUrl) {
     bienalMaterialLink.href = cfg.bienal.materialUrl;
   }
+
+  if (cfg.checkout) {
+    const legacyLink = cfg.checkout.paymentLink || "#";
+
+    checkoutConfig = {
+      paymentLinks: {
+        ars: cfg.checkout.paymentLinks?.ars || legacyLink,
+        usd: cfg.checkout.paymentLinks?.usd || legacyLink,
+      },
+      paymentProviders: {
+        ars: cfg.checkout.paymentProviders?.ars || "Mercado Pago",
+        usd: cfg.checkout.paymentProviders?.usd || "PayPal",
+      },
+    };
+  }
+
+  updateCheckoutSubmitLabel();
 }
 
 function setupBienalSection() {
@@ -398,19 +469,174 @@ function setActiveLink() {
   });
 }
 
+function formatPrice(value) {
+  return Number(value || 0).toLocaleString("es-AR");
+}
+
+function getCartTotal() {
+  return cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
+
+function saveCartToStorage() {
+  try {
+    localStorage.setItem(cartStorageKey, JSON.stringify(cartItems));
+  } catch {
+    // Si el navegador bloquea almacenamiento, el carrito funciona en memoria.
+  }
+}
+
+function loadCartFromStorage() {
+  try {
+    const raw = localStorage.getItem(cartStorageKey);
+    if (!raw) return;
+
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return;
+
+    cartItems.length = 0;
+    parsed.forEach((item) => {
+      const name = String(item.name || "").trim();
+      const price = Number(item.price);
+      const qty = Number(item.qty || 1);
+      if (!name || Number.isNaN(price) || price <= 0 || qty <= 0) return;
+      cartItems.push({ name, price, qty });
+    });
+  } catch {
+    // Si el JSON está corrupto, seguimos con carrito vacío.
+  }
+}
+
+function saveCheckoutData() {
+  if (!checkoutForm) return;
+
+  const payload = {
+    name: checkoutName?.value?.trim() || "",
+    phone: checkoutPhone?.value?.trim() || "",
+    email: checkoutEmail?.value?.trim() || "",
+    currency: getSelectedCurrency(),
+    notes: checkoutNotes?.value?.trim() || "",
+  };
+
+  try {
+    localStorage.setItem(checkoutStorageKey, JSON.stringify(payload));
+  } catch {
+    // Si falla almacenamiento, no bloqueamos el checkout.
+  }
+}
+
+function loadCheckoutData() {
+  if (!checkoutForm) return;
+
+  try {
+    const raw = localStorage.getItem(checkoutStorageKey);
+    if (!raw) return;
+
+    const data = JSON.parse(raw);
+    if (checkoutName) checkoutName.value = data.name || "";
+    if (checkoutPhone) checkoutPhone.value = data.phone || "";
+    if (checkoutEmail) checkoutEmail.value = data.email || "";
+    if (data.currency && checkoutCurrencyInputs.length) {
+      checkoutCurrencyInputs.forEach((input) => {
+        input.checked = input.value === data.currency;
+      });
+    }
+    if (checkoutNotes) checkoutNotes.value = data.notes || "";
+  } catch {
+    // Ignoramos datos inválidos de almacenamiento.
+  }
+}
+
 function renderCart() {
+  if (!cartItemsList || !cartTotal || !cartCount) return;
+
   cartItemsList.innerHTML = "";
-  let total = 0;
+  const total = getCartTotal();
 
   cartItems.forEach((item) => {
-    total += item.price;
     const li = document.createElement("li");
-    li.textContent = `${item.name} - $ ${item.price.toLocaleString("es-AR")}`;
+    li.className = "cart-item";
+
+    const text = document.createElement("span");
+    text.textContent = `${item.name} x${item.qty} - $ ${formatPrice(item.price * item.qty)}`;
+
+    const removeButton = document.createElement("button");
+    removeButton.type = "button";
+    removeButton.className = "cart-remove-btn";
+    removeButton.textContent = "Quitar";
+    removeButton.addEventListener("click", () => {
+      const index = cartItems.findIndex(
+        (cartItem) => cartItem.name === item.name,
+      );
+      if (index < 0) return;
+
+      if (cartItems[index].qty > 1) {
+        cartItems[index].qty -= 1;
+      } else {
+        cartItems.splice(index, 1);
+      }
+
+      saveCartToStorage();
+      renderCart();
+    });
+
+    li.append(text, removeButton);
     cartItemsList.appendChild(li);
   });
 
-  cartCount.textContent = String(cartItems.length);
-  cartTotal.textContent = total.toLocaleString("es-AR");
+  if (!cartItems.length) {
+    const li = document.createElement("li");
+    li.className = "cart-empty";
+    li.textContent = "Todavía no agregaste libros.";
+    cartItemsList.appendChild(li);
+  }
+
+  const totalQty = cartItems.reduce((sum, item) => sum + item.qty, 0);
+  cartCount.textContent = String(totalQty);
+  cartTotal.textContent = formatPrice(total);
+}
+
+function setupCheckoutForm() {
+  if (!checkoutForm) return;
+
+  loadCheckoutData();
+
+  [checkoutName, checkoutPhone, checkoutEmail, checkoutNotes].forEach(
+    (field) => {
+      if (!field) return;
+      field.addEventListener("input", saveCheckoutData);
+    },
+  );
+
+  checkoutCurrencyInputs.forEach((input) => {
+    input.addEventListener("change", () => {
+      updateCheckoutSubmitLabel();
+      saveCheckoutData();
+    });
+  });
+
+  checkoutForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!cartItems.length) {
+      window.alert("Agregá al menos un libro al carrito para continuar.");
+      return;
+    }
+
+    saveCheckoutData();
+
+    const selectedCurrency = getSelectedCurrency();
+    const currencyInfo = getCurrencyInfo(selectedCurrency);
+    if (currencyInfo.paymentLink === "#") {
+      window.alert(
+        `Configurá el link de pago en RED_CONFIG.checkout.paymentLinks.${selectedCurrency}.`,
+      );
+      return;
+    }
+
+    window.open(currencyInfo.paymentLink, "_blank", "noopener,noreferrer");
+  });
+
+  updateCheckoutSubmitLabel();
 }
 
 window.addEventListener("scroll", setActiveLink);
@@ -421,6 +647,9 @@ markActiveDropdownPage();
 setupDonationIntentTracking();
 setupDonationSection();
 setupBienalSection();
+loadCartFromStorage();
+renderCart();
+setupCheckoutForm();
 
 links.forEach((link) => {
   link.addEventListener("click", (event) => {
@@ -439,15 +668,35 @@ document.querySelectorAll(".add-cart").forEach((button) => {
   button.addEventListener("click", () => {
     if (!cartPanel || !cartItemsList || !cartTotal || !cartCount) return;
 
-    cartItems.push({
-      name: button.dataset.item,
-      price: Number(button.dataset.price),
-    });
+    const name = button.dataset.item;
+    const price = Number(button.dataset.price);
+    if (!name || Number.isNaN(price) || price <= 0) return;
+
+    const existingItem = cartItems.find((item) => item.name === name);
+    if (existingItem) {
+      existingItem.qty += 1;
+    } else {
+      cartItems.push({
+        name,
+        price,
+        qty: 1,
+      });
+    }
+
+    saveCartToStorage();
     renderCart();
     cartPanel.classList.add("open");
     cartPanel.setAttribute("aria-hidden", "false");
   });
 });
+
+if (clearCartButton) {
+  clearCartButton.addEventListener("click", () => {
+    cartItems.length = 0;
+    saveCartToStorage();
+    renderCart();
+  });
+}
 
 const openCartButton = document.getElementById("open-cart");
 if (openCartButton && cartPanel) {
