@@ -650,6 +650,59 @@ setupBienalSection();
 loadCartFromStorage();
 renderCart();
 setupCheckoutForm();
+initEventLightbox();
+
+function initEventLightbox() {
+  const overlay = document.createElement("div");
+  overlay.className = "lightbox-overlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Vista ampliada del evento");
+
+  const inner = document.createElement("div");
+  inner.className = "lightbox-inner";
+
+  const img = document.createElement("img");
+  img.alt = "";
+
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "lightbox-close";
+  closeBtn.setAttribute("aria-label", "Cerrar imagen");
+  closeBtn.textContent = "\u00D7";
+
+  inner.append(img, closeBtn);
+  overlay.appendChild(inner);
+  document.body.appendChild(overlay);
+
+  function openLightbox(src, alt) {
+    img.src = src;
+    img.alt = alt || "";
+    overlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("click", (e) => {
+    const target = e.target.closest(".event-media img");
+    if (target) openLightbox(target.src, target.alt);
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+
+  overlay.addEventListener("click", (e) => {
+    if (!inner.contains(e.target) || e.target === overlay) closeLightbox();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("is-open"))
+      closeLightbox();
+  });
+}
 
 links.forEach((link) => {
   link.addEventListener("click", (event) => {
