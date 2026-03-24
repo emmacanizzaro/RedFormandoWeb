@@ -57,16 +57,24 @@
 
       <nav class="top-nav" aria-label="Navegación principal">
         <a href="#inicio" class="nav-link active">INICIO</a>
-        <a href="#nosotros" class="nav-link">NOSOTROS</a>
-        <details class="nav-dropdown">
-          <summary class="nav-link nav-link-dropdown">SECCIONES</summary>
-          <div class="dropdown-menu">
-            <a href="familia.html">FAMILIA</a>
-            <a href="blog.html">BLOG</a>
-            <a href="recursos-libros.html">RECURSOS</a>
-            <a href="recursos.html">ENTRENAMIENTO</a>
-          </div>
-        </details>
+        <button
+          class="hamburger js-hamburger-menu"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="menu-hamburguesa"
+        >
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+        <div class="menu-hamburguesa" id="menu-hamburguesa" aria-hidden="true">
+          <a href="#nosotros" class="nav-link">NOSOTROS</a>
+          <a href="familia.html" class="nav-link">FAMILIA</a>
+          <a href="blog.html" class="nav-link">BLOG</a>
+          <a href="recursos-libros.html" class="nav-link">RECURSOS</a>
+          <a href="recursos.html" class="nav-link">ENTRENAMIENTO</a>
+        </div>
+        </div>
       </nav>
     </header>
 
@@ -115,6 +123,90 @@
       </div>
 
       <section id="nosotros" class="section">
+        <!-- Sección oculta de inscripción al evento -->
+        <section
+          id="inscripcion-evento"
+          class="section inscripcion-detail-section"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="inscripcion-title"
+          hidden
+          aria-hidden="true"
+        >
+          <div class="section-inner two-col" style="position: relative">
+            <button
+              id="cerrar-inscripcion-x"
+              class="modal-close"
+              type="button"
+              aria-label="Cerrar inscripción"
+              tabindex="0"
+            >
+              &times;
+            </button>
+            <div class="img-placeholder">
+              <img
+                id="evento-inscripcion-img"
+                src="assets/images/Encuentro RedFormando.png"
+                alt="Imagen evento inscripción"
+                class="evento-inscripcion-img"
+              />
+            </div>
+            <form
+              id="form-inscripcion-evento"
+              class="contact-form form-inscripcion-evento"
+            >
+              <h2 id="inscripcion-title" class="inscripcion-title">
+                Inscripción al Evento
+              </h2>
+              <label for="nombre-inscripcion">Nombre y Apellido</label>
+              <input
+                id="nombre-inscripcion"
+                name="nombre"
+                type="text"
+                required
+              />
+              <label for="email-inscripcion">Correo electrónico</label>
+              <input
+                id="email-inscripcion"
+                name="email"
+                type="email"
+                required
+              />
+              <div class="inscripcion-moneda-row">
+                <label class="inscripcion-moneda-label">Moneda:</label>
+                <label
+                  ><input type="radio" name="moneda" value="ars" checked />
+                  Pesos</label
+                >
+                <label
+                  ><input type="radio" name="moneda" value="usd" />
+                  Dólares</label
+                >
+              </div>
+              <button
+                id="btn-pagar-inscripcion"
+                type="button"
+                class="btn-strong"
+                style="width: 100%; margin-top: 10px"
+              >
+                Pagar
+              </button>
+              <button
+                id="cerrar-inscripcion-evento"
+                type="button"
+                class="btn-strong"
+                style="
+                  width: 100%;
+                  margin-top: 10px;
+                  background: #ccc;
+                  color: #222;
+                "
+              >
+                Cancelar
+              </button>
+            </form>
+          </div>
+        </section>
         <div class="section-inner two-col">
           <article>
             <h2>NOSOTROS</h2>
@@ -159,8 +251,8 @@
             <div class="img-placeholder">
               <img
                 id="nosotros-image"
-                src="assets/images/img-home.svg"
-                alt="Imagen institucional de Redformando"
+                src="assets/images/Alberto & Ana.jpg"
+                alt="Ana y Alberto Calviño - Fundadores Redformando"
               />
             </div>
             <div class="social-block">

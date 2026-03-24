@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1920" height="1080" fill="#e3eaf7"/>
-  <g>
-    <path d="M 200 800 Q 400 600 800 700 Q 1200 800 1600 600 Q 1800 500 1700 300 Q 1500 100 1200 200 Q 900 300 600 200 Q 300 100 200 300 Q 100 500 200 800 Z" fill="#2196f3" fill-opacity="0.7"/>
-    <!-- Este es un trazo decorativo, reemplazar por un SVG de mapa mundial real para mayor precisión -->
-  </g>
-</svg>

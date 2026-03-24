@@ -1,3 +1,252 @@
+.inscripcion-detail-section .modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #fff;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.inscripcion-detail-section .modal-close:hover {
+  background: #e0e0e0;
+}
+/* Overlay oscuro para menú hamburguesa */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 30, 0.55);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* === HAMBURGUESA === */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  gap: 6px;
+  z-index: 101;
+  position: relative;
+}
+.hamburger-bar {
+  display: block;
+  width: 28px;
+  height: 4px;
+  background: var(--brand-blue);
+  border-radius: 3px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0;
+}
+.hamburger.open .hamburger-bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+.hamburger.open .hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.2);
+}
+.hamburger.open .hamburger-bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+.menu-hamburguesa {
+  position: absolute;
+  top: 60px;
+  right: 24px;
+  min-width: 180px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(32, 14, 50, 0.12);
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  padding: 10px 0;
+  z-index: 99;
+  animation: menuHamburguesaFade 0.25s;
+}
+.menu-hamburguesa.open {
+  display: flex;
+}
+.menu-hamburguesa .nav-link {
+  color: var(--ink);
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: 0;
+  text-align: left;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.menu-hamburguesa .nav-link:hover {
+  background: var(--brand-blue);
+  color: #fff;
+}
+@keyframes menuHamburguesaFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.top-nav {
+  position: relative;
+}
+/* Siempre mostrar el menú hamburguesa, ocultar los otros links excepto INICIO */
+.top-nav > .nav-link:not(:first-child) {
+  display: none;
+}
+/* Imagen de inscripción evento */
+.evento-inscripcion-img {
+  object-fit: cover;
+  object-position: center 46%;
+  width: 100%;
+  height: 370px;
+  min-height: 370px;
+  border-radius: 24px 24px 82px 24px;
+  border: 2px solid rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 12px 28px rgba(23, 39, 89, 0.22),
+    inset 0 0 0 1px rgba(23, 39, 89, 0.12);
+  background: #fff;
+}
+
+/* Formulario inscripción evento */
+.form-inscripcion-evento {
+  max-width: 420px;
+  margin: auto;
+}
+.inscripcion-title {
+  margin-bottom: 18px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #172759;
+  text-align: center;
+}
+.inscripcion-moneda-row {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+  align-items: center;
+}
+.inscripcion-moneda-label {
+  font-weight: 700;
+}
+/* === INSCRIPCIÓN EVENTO === */
+.inscripcion-detail-section[hidden] {
+  display: none !important;
+}
+.inscripcion-detail-section.is-open {
+  animation: donationReveal 0.35s ease;
+}
+.inscripcion-detail-section {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  margin: 0;
+  padding: 108px 16px 24px;
+  background: rgba(14, 20, 35, 0.55);
+  overflow-y: auto;
+}
+.inscripcion-detail-section .section-inner {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  background: #fff;
+}
+.modal-overlay.is-open .modal-content {
+  animation: donationReveal 0.35s ease;
+}
+/* === MODAL INSCRIPCIÓN EVENTO === */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 30, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.2s;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  max-width: 540px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 38px 28px 28px 28px;
+}
+
+.modal-img {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto 12px auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: #fff;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.modal-close:hover {
+  background: #e0e0e0;
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    max-width: 98vw;
+    max-height: 98vh;
+  }
+  .modal-img {
+    max-width: 98vw;
+    max-height: 70vh;
+  }
+}
 :root {
   --ink: #200e32;
   --ink-soft: #3f2e51;
@@ -1107,6 +1356,10 @@ th {
   width: 100%;
   height: 220px;
   object-fit: cover;
+  object-position: 70% center;
+  border-radius: 18px;
+  padding: 8px 12px 8px 12px;
+  background: #fff;
 }
 
 .course-card div {

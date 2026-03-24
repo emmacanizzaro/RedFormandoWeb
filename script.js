@@ -1,3 +1,176 @@
+// === INICIALIZACIÓN GLOBAL UNIFICADA ===
+document.addEventListener("DOMContentLoaded", function () {
+  // MENÚ HAMBURGUESA MULTI-SECCIÓN
+  function setupHamburgerMenus() {
+    const hamburgerBtns = document.querySelectorAll(".js-hamburger-menu");
+    hamburgerBtns.forEach((hamburgerBtn) => {
+      // Buscar el menú hamburguesa hermano
+      const menuHamburguesa =
+        hamburgerBtn.parentElement.querySelector(".menu-hamburguesa");
+      if (!menuHamburguesa) return;
+      hamburgerBtn.addEventListener("click", (e) => {
+        if (document.body.classList.contains("modal-open")) return;
+        const isOpen = menuHamburguesa.classList.toggle("open");
+        hamburgerBtn.classList.toggle("open", isOpen);
+        hamburgerBtn.setAttribute("aria-expanded", isOpen);
+        menuHamburguesa.setAttribute("aria-hidden", !isOpen);
+        // Cerrar otros menús abiertos
+        document
+          .querySelectorAll(".menu-hamburguesa.open")
+          .forEach((otherMenu) => {
+            if (otherMenu !== menuHamburguesa) {
+              otherMenu.classList.remove("open");
+              const otherBtn =
+                otherMenu.parentElement.querySelector(".js-hamburger-menu");
+              if (otherBtn) {
+                otherBtn.classList.remove("open");
+                otherBtn.setAttribute("aria-expanded", "false");
+              }
+              otherMenu.setAttribute("aria-hidden", "true");
+            }
+          });
+        e.stopPropagation();
+      });
+      // Cerrar menú al hacer click fuera
+      document.addEventListener("click", (e) => {
+        if (
+          menuHamburguesa.classList.contains("open") &&
+          !menuHamburguesa.contains(e.target) &&
+          e.target !== hamburgerBtn
+        ) {
+          menuHamburguesa.classList.remove("open");
+          hamburgerBtn.classList.remove("open");
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+          menuHamburguesa.setAttribute("aria-hidden", "true");
+        }
+      });
+      // Cerrar con Escape
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && menuHamburguesa.classList.contains("open")) {
+          menuHamburguesa.classList.remove("open");
+          hamburgerBtn.classList.remove("open");
+          hamburgerBtn.setAttribute("aria-expanded", "false");
+          menuHamburguesa.setAttribute("aria-hidden", "true");
+        }
+      });
+    });
+  }
+  setupHamburgerMenus();
+
+  // Inicialización de recursos y eventos
+  if (typeof applyRuntimeConfig === "function") {
+    applyRuntimeConfig();
+  }
+});
+// === INSCRIPCIÓN EVENTO ===
+document.addEventListener("DOMContentLoaded", function () {
+  const abrirInscripcionBtn = document.getElementById(
+    "abrir-inscripcion-evento",
+  );
+  const inscripcionSection = document.getElementById("inscripcion-evento");
+  // Delegación para cerrar (X y Cancelar)
+  document.body.addEventListener("click", function (e) {
+    if (!inscripcionSection) return;
+    // Botón X
+    if (e.target && e.target.id === "cerrar-inscripcion-x") {
+      inscripcionSection.hidden = true;
+      inscripcionSection.setAttribute("aria-hidden", "true");
+      inscripcionSection.classList.remove("is-open");
+      document.body.classList.remove("modal-open");
+    }
+    // Botón Cancelar
+    if (e.target && e.target.id === "cerrar-inscripcion-evento") {
+      inscripcionSection.hidden = true;
+      inscripcionSection.setAttribute("aria-hidden", "true");
+      inscripcionSection.classList.remove("is-open");
+      document.body.classList.remove("modal-open");
+    }
+    // Fondo oscuro
+    if (e.target === inscripcionSection) {
+      inscripcionSection.hidden = true;
+      inscripcionSection.setAttribute("aria-hidden", "true");
+      inscripcionSection.classList.remove("is-open");
+      document.body.classList.remove("modal-open");
+    }
+  });
+  // Escape
+  window.addEventListener("keydown", function (event) {
+    if (
+      inscripcionSection &&
+      event.key === "Escape" &&
+      !inscripcionSection.hidden
+    ) {
+      inscripcionSection.hidden = true;
+      inscripcionSection.setAttribute("aria-hidden", "true");
+      inscripcionSection.classList.remove("is-open");
+      document.body.classList.remove("modal-open");
+    }
+  });
+  // Abrir
+  if (abrirInscripcionBtn && inscripcionSection) {
+    abrirInscripcionBtn.addEventListener("click", function () {
+      inscripcionSection.hidden = false;
+      inscripcionSection.setAttribute("aria-hidden", "false");
+      inscripcionSection.classList.add("is-open");
+      document.body.classList.add("modal-open");
+      // Foco accesible
+      const cerrarBtn = document.getElementById("cerrar-inscripcion-evento");
+      if (cerrarBtn) cerrarBtn.focus();
+    });
+  }
+  // Pagar
+  const btnPagarInscripcion = document.getElementById("btn-pagar-inscripcion");
+  if (btnPagarInscripcion) {
+    btnPagarInscripcion.addEventListener("click", function () {
+      const moneda = document.querySelector('input[name="moneda"]:checked');
+      if (!moneda) return;
+      if (moneda.value === "ars") {
+        window.open("https://www.mercadopago.com.ar/", "_blank");
+      } else {
+        window.open("https://www.paypal.com/paypalme/redformando", "_blank");
+      }
+    });
+  }
+});
+// === MODAL INSCRIPCIÓN EVENTO ===
+const abrirModalBtn = document.getElementById("abrir-modal-evento");
+const modal = document.getElementById("modal-inscripcion");
+const cerrarModalBtn = document.getElementById("cerrar-modal-inscripcion");
+
+if (abrirModalBtn && modal && cerrarModalBtn) {
+  abrirModalBtn.addEventListener("click", () => {
+    modal.hidden = false;
+    modal.classList.add("is-open");
+    document.body.classList.add("modal-open");
+    // Enfoca el botón de cerrar para accesibilidad
+    cerrarModalBtn.focus();
+  });
+
+  function cerrarModal() {
+    modal.classList.remove("is-open");
+    setTimeout(() => {
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+      document.body.style.overflow = "";
+    }, 300);
+  }
+
+  cerrarModalBtn.addEventListener("click", cerrarModal);
+
+  // Cierra al hacer clic fuera del contenido
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      cerrarModal();
+    }
+  });
+
+  // Cierra con Escape
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) {
+      cerrarModal();
+    }
+  });
+}
 const links = document.querySelectorAll(".nav-link");
 const sections = document.querySelectorAll("main section[id]");
 
@@ -124,14 +297,23 @@ function applyRuntimeConfig() {
 
       const cta = document.createElement("a");
       cta.className = "event-link";
-      cta.href = item.ctaLink || "#contacto";
+      cta.href = "#";
       cta.textContent = item.ctaLabel || "Más info";
-      cta.target = item.ctaTarget || "_self";
-
-      if (cta.target === "_blank") {
-        cta.rel = "noopener noreferrer";
-      }
-
+      cta.addEventListener("click", function (e) {
+        e.preventDefault();
+        const inscripcionSection =
+          document.getElementById("inscripcion-evento");
+        if (inscripcionSection) {
+          inscripcionSection.hidden = false;
+          inscripcionSection.setAttribute("aria-hidden", "false");
+          inscripcionSection.classList.add("is-open");
+          document.body.classList.add("modal-open");
+          const cerrarBtn = document.getElementById(
+            "cerrar-inscripcion-evento",
+          );
+          if (cerrarBtn) cerrarBtn.focus();
+        }
+      });
       media.appendChild(img);
       card.append(note, media, cta);
       eventsGrid.appendChild(card);

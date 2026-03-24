@@ -19,9 +19,9 @@ window.RED_CONFIG = {
 
   courses: {
     webinarForm: "https://www.instagram.com/webinar_redformando/",
-    webinarImage: "assets/images/Webinar.jpg",
+    webinarImage: "assets/images/webinar.png",
     edmiForm: "https://www.instagram.com/edm.internacional/",
-    edmiImage: "assets/images/EDMI.jpg",
+    edmiImage: "assets/images/edmi.png",
   },
 
   checkout: {
@@ -51,7 +51,7 @@ window.RED_CONFIG = {
         image: "assets/images/Encuentro RedFormando.png",
         alt: "Banner Encuentro RedFormando",
         ctaLabel: "Reservá tu lugar",
-        ctaLink: "#contacto",
+        ctaLink: "#inscripcion-evento",
         ctaTarget: "_self",
       },
     ],
