@@ -248,6 +248,49 @@ function setupDonationIntentTracking() {
   });
 }
 
+function syncFamilyPhotoBottomAlignment() {
+  const leftTableBox = document.querySelector(".congregaciones-box");
+  const workersColumn = document.querySelector(".workers-column");
+  const workersTableBox = document.querySelector(".workers-table-box");
+  const familyPhoto = document.querySelector(".family-photo-frame");
+
+  if (!leftTableBox || !workersColumn || !workersTableBox || !familyPhoto) {
+    return;
+  }
+
+  if (window.matchMedia("(max-width: 900px)").matches) {
+    familyPhoto.style.height = "";
+    return;
+  }
+
+  const leftHeight = leftTableBox.getBoundingClientRect().height;
+  const workersTableHeight = workersTableBox.getBoundingClientRect().height;
+  const workersStyles = window.getComputedStyle(workersColumn);
+  const gap = parseFloat(workersStyles.rowGap || workersStyles.gap || "0") || 0;
+  const visualOffset = 3;
+  const targetHeight = Math.floor(
+    leftHeight - workersTableHeight - gap - visualOffset,
+  );
+
+  if (targetHeight > 140) {
+    familyPhoto.style.height = `${targetHeight}px`;
+  } else {
+    familyPhoto.style.height = "";
+  }
+}
+
+function setupFamilyPhotoAlignment() {
+  if (!document.querySelector(".family-tables")) return;
+
+  const applySync = () => {
+    window.requestAnimationFrame(syncFamilyPhotoBottomAlignment);
+  };
+
+  applySync();
+  window.addEventListener("resize", applySync);
+  window.addEventListener("load", applySync);
+}
+
 function getYouTubeThumbnailUrl(videoUrl) {
   if (!videoUrl) return null;
 
@@ -827,6 +870,7 @@ applyRuntimeConfig();
 setupCarouselControls();
 markActiveDropdownPage();
 setupDonationIntentTracking();
+setupFamilyPhotoAlignment();
 setupDonationSection();
 setupBienalSection();
 loadCartFromStorage();
