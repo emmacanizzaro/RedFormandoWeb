@@ -1,11 +1,11 @@
 <template>
   <section
+    v-show="isOpen"
     id="bienal-detalle"
     class="section bienal-detail-section"
     role="dialog"
     aria-modal="true"
     aria-labelledby="bienal-detail-title"
-    v-show="isOpen"
     :aria-hidden="(!isOpen).toString()"
   >
     <div class="section-inner">

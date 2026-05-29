@@ -1,11 +1,11 @@
 <template>
   <section
+    v-show="isOpen"
     id="donaciones"
     class="section donation-section"
     role="dialog"
     aria-modal="true"
     aria-labelledby="donation-title"
-    v-show="isOpen"
     :aria-hidden="(!isOpen).toString()"
   >
     <div class="section-inner donation-panel">

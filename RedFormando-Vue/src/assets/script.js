@@ -127,6 +127,16 @@ const abrirModalBtn = document.getElementById('abrir-modal-evento')
 const modal = document.getElementById('modal-inscripcion')
 const cerrarModalBtn = document.getElementById('cerrar-modal-inscripcion')
 
+function cerrarModal() {
+  if (!modal) return;
+  modal.classList.remove('is-open')
+  setTimeout(() => {
+    modal.hidden = true
+    document.body.classList.remove('modal-open')
+    document.body.style.overflow = ''
+  }, 300)
+}
+
 if (abrirModalBtn && modal && cerrarModalBtn) {
   abrirModalBtn.addEventListener('click', () => {
     modal.hidden = false
@@ -135,15 +145,6 @@ if (abrirModalBtn && modal && cerrarModalBtn) {
     // Enfoca el botón de cerrar para accesibilidad
     cerrarModalBtn.focus()
   })
-
-  function cerrarModal() {
-    modal.classList.remove('is-open')
-    setTimeout(() => {
-      modal.hidden = true
-      document.body.classList.remove('modal-open')
-      document.body.style.overflow = ''
-    }, 300)
-  }
 
   cerrarModalBtn.addEventListener('click', cerrarModal)
 

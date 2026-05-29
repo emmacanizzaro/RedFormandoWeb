@@ -1,11 +1,11 @@
 <template>
   <section
+    v-show="isOpen"
     id="inscripcion-evento"
     class="section inscripcion-detail-section"
     role="dialog"
     aria-modal="true"
     aria-labelledby="inscripcion-title"
-    v-show="isOpen"
     :aria-hidden="(!isOpen).toString()"
   >
     <div class="section-inner two-col" style="position: relative">
@@ -40,9 +40,9 @@
         <div class="inscripcion-moneda-row">
           <label class="inscripcion-moneda-label">Moneda:</label>
           <label
-            ><input type="radio" name="moneda" value="ars" v-model="moneda" checked /> Pesos</label
+            ><input v-model="moneda" type="radio" name="moneda" value="ars" checked /> Pesos</label
           >
-          <label><input type="radio" name="moneda" value="usd" v-model="moneda" /> Dólares</label>
+          <label><input v-model="moneda" type="radio" name="moneda" value="usd" /> Dólares</label>
         </div>
         <button
           id="btn-pagar-inscripcion"

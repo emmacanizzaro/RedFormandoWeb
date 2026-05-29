@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1779926254324" clover="3.2.0">
+  <project timestamp="1779926254324" name="All files">
+    <metrics statements="59" coveredstatements="29" conditionals="66" coveredconditionals="50" methods="23" coveredmethods="3" elements="148" coveredelements="82" complexity="0" loc="59" ncloc="59" packages="1" files="4" classes="4"/>
+    <file name="BienalModal.vue" path="/Users/emmanuelcanizzaro/Desktop/Proyectos Visual Studio Code/Landing Page/RedFormando Web/RedFormando-Vue/src/components/BienalModal.vue">
+      <metrics statements="12" coveredstatements="7" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="1"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="95" count="1" type="stmt"/>
+      <line num="98" count="1" type="stmt"/>
+      <line num="100" count="1" type="stmt"/>
+      <line num="103" count="0" type="stmt"/>
+      <line num="104" count="0" type="stmt"/>
+      <line num="108" count="0" type="cond" truecount="0" falsecount="4"/>
+      <line num="109" count="0" type="stmt"/>
+      <line num="113" count="1" type="stmt"/>
+      <line num="114" count="1" type="stmt"/>
+      <line num="117" count="1" type="stmt"/>
+      <line num="118" count="0" type="stmt"/>
+    </file>
+    <file name="EventosBoard.vue" path="/Users/emmanuelcanizzaro/Desktop/Proyectos Visual Studio Code/Landing Page/RedFormando Web/RedFormando-Vue/src/components/EventosBoard.vue">
+      <metrics statements="6" coveredstatements="5" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="1"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="13" count="0" type="cond" truecount="2" falsecount="0"/>
+      <line num="21" count="1" type="stmt"/>
+    </file>
+    <file name="HomePage.vue" path="/Users/emmanuelcanizzaro/Desktop/Proyectos Visual Studio Code/Landing Page/RedFormando Web/RedFormando-Vue/src/components/HomePage.vue">
+      <metrics statements="22" coveredstatements="8" conditionals="38" coveredconditionals="32" methods="9" coveredmethods="0"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="19" count="0" type="cond" truecount="2" falsecount="0"/>
+      <line num="23" count="0" type="cond" truecount="2" falsecount="0"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="28" count="0" type="cond" truecount="2" falsecount="0"/>
+      <line num="30" count="0" type="cond" truecount="2" falsecount="0"/>
+      <line num="155" count="1" type="stmt"/>
+      <line num="170" count="0" type="cond" truecount="2" falsecount="0"/>
+      <line num="172" count="0" type="cond" truecount="2" falsecount="0"/>
+      <line num="174" count="0" type="cond" truecount="2" falsecount="0"/>
+      <line num="187" count="1" type="stmt"/>
+      <line num="188" count="1" type="stmt"/>
+      <line num="191" count="1" type="stmt"/>
+      <line num="192" count="1" type="stmt"/>
+      <line num="194" count="0" type="cond" truecount="0" falsecount="5"/>
+      <line num="195" count="0" type="stmt"/>
+      <line num="196" count="0" type="stmt"/>
+      <line num="199" count="0" type="stmt"/>
+      <line num="200" count="0" type="stmt"/>
+      <line num="201" count="0" type="stmt"/>
+      <line num="203" count="0" type="stmt"/>
+    </file>
+    <file name="InscripcionModal.vue" path="/Users/emmanuelcanizzaro/Desktop/Proyectos Visual Studio Code/Landing Page/RedFormando Web/RedFormando-Vue/src/components/InscripcionModal.vue">
+      <metrics statements="19" coveredstatements="9" conditionals="20" coveredconditionals="14" methods="8" coveredmethods="1"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="40" count="1" type="stmt"/>
+      <line num="43" count="0" type="cond" truecount="4" falsecount="0"/>
+      <line num="45" count="0" type="cond" truecount="4" falsecount="0"/>
+      <line num="73" count="1" type="stmt"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="78" count="1" type="stmt"/>
+      <line num="79" count="1" type="stmt"/>
+      <line num="82" count="0" type="stmt"/>
+      <line num="83" count="0" type="stmt"/>
+      <line num="87" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="88" count="0" type="stmt"/>
+      <line num="90" count="0" type="stmt"/>
+      <line num="95" count="0" type="cond" truecount="0" falsecount="4"/>
+      <line num="96" count="0" type="stmt"/>
+      <line num="100" count="1" type="stmt"/>
+      <line num="101" count="1" type="stmt"/>
+      <line num="104" count="1" type="stmt"/>
+      <line num="105" count="0" type="stmt"/>
+    </file>
+  </project>
+</coverage>

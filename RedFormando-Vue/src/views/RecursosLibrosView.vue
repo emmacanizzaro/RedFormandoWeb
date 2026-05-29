@@ -6,8 +6,8 @@
         <button
           class="btn-strong"
           type="button"
-          @click="openCart"
           aria-label="Ver carrito de compras"
+          @click="openCart"
         >
           Ver carrito (<span>{{ cartCount }}</span
           >)
@@ -23,7 +23,7 @@
         </button>
       </div>
       <div class="product-carousel">
-        <article class="product-card" v-for="(book, i) in visibleBooks" :key="book.title">
+        <article v-for="book in visibleBooks" :key="book.title" class="product-card">
           <img
             :src="book.img"
             :alt="'Portada: ' + book.title"
@@ -160,7 +160,7 @@ function clearCart() {
 function openCart() {
   showCart.value = true
 }
-function checkout(data) {
+function checkout() {
   // Aquí se puede integrar lógica de checkout real
   alert('¡Gracias por tu compra!')
   clearCart()

@@ -1,10 +1,10 @@
 <template>
   <aside
     v-if="show"
+    ref="cartPanel"
     class="cart-panel"
     aria-label="Carrito de compras"
     tabindex="-1"
-    ref="cartPanel"
   >
     <div class="cart-header">
       <h3>Carrito</h3>
@@ -18,7 +18,7 @@
     </ul>
     <p class="cart-total">Total: $ {{ total }}</p>
     <button class="cart-clear-btn" @click="$emit('clear')">Vaciar carrito</button>
-    <form class="checkout-form" @submit.prevent="submit" aria-label="Formulario de checkout">
+    <form class="checkout-form" aria-label="Formulario de checkout" @submit.prevent="submit">
       <div v-if="feedback" class="checkout-feedback" role="status" aria-live="polite">
         {{ feedback }}
       </div>
@@ -39,10 +39,10 @@
       <fieldset class="checkout-currency-group">
         <legend>Moneda de pago</legend>
         <label class="checkout-currency-option">
-          <input type="radio" value="ars" v-model="form.currency" /> Pesos argentinos ($)
+          <input v-model="form.currency" type="radio" value="ars" /> Pesos argentinos ($)
         </label>
         <label class="checkout-currency-option">
-          <input type="radio" value="usd" v-model="form.currency" /> Dólares estadounidenses (u$d)
+          <input v-model="form.currency" type="radio" value="usd" /> Dólares estadounidenses (u$d)
         </label>
       </fieldset>
       <label>
@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, watch, ref, nextTick } from 'vue'
+import { reactive, watch, ref, nextTick } from 'vue'
 import { useCart } from '../store/cart.js'
 const props = defineProps({
   show: Boolean,

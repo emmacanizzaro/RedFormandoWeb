@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Formatear código (Prettier)
+        run: npm run format -- --check
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Ejecutar tests (Vitest)
+        run: npx vitest run --coverage
+
+      - name: Subir cobertura a Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/clover.xml
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Build de producción (Vite)
+        run: npm run build
+
+      - name: Levantar servidor local (Vite)
+        run: npm run dev &
+        env:
+          NODE_ENV: development
+        shell: bash
+
+      - name: Esperar a que el servidor esté listo
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:5173 > /dev/null; then
+              echo "Servidor listo"; break;
+            fi
+            sleep 2
+          done
+
+      - name: Auditoría de accesibilidad (pa11y)
+        run: npm run a11y

@@ -18,6 +18,7 @@
 </template>
 
 <script setup>
+const emit = defineEmits(['inscribir'])
 const eventos = [
   {
     id: 1,

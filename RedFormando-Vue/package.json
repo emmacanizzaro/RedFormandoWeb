@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.vue",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "a11y": "node scripts/a11y.cjs"
   },
   "dependencies": {
     "@vueuse/head": "^2.0.0",
@@ -17,20 +18,31 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
-      ,
-      "lint-staged": {
-        "*.{js,jsx,ts,tsx,vue,css,scss,md,html}": [
-          "prettier --write",
-          "eslint --fix"
-        ]
-      }
+    "@eslint/js": "^10.0.1",
     "@vitejs/plugin-vue": "^6.0.6",
-    "@vue/eslint-config-prettier": "^10.2.0",
-    "eslint": "^10.4.0",
-    "eslint-plugin-vue": "^10.9.1",
+    "@vitest/coverage-v8": "^4.1.7",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/test-utils": "^2.4.10",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-vue": "^9.33.0",
     "husky": "^9.1.7",
+    "jsdom": "^29.1.1",
     "lint-staged": "^17.0.5",
+    "pa11y": "^9.1.1",
     "prettier": "^3.8.3",
-    "vite": "^8.0.12"
+    "rollup-plugin-visualizer": "^7.0.1",
+    "tinyglobby": "^0.2.16",
+    "vite": "^8.0.12",
+    "vite-plugin-imagemin": "^0.6.1",
+    "vitest": "^4.1.7",
+    "vue-eslint-parser": "^9.4.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue,css,scss,md,html}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

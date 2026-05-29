@@ -185,7 +185,6 @@
 import '../assets/familia-custom.css'
 import { onMounted, onBeforeUnmount } from 'vue'
 import { useMeta } from '../plugins/meta.js'
-const familiaImg = new URL('/assets/images/Familia.png', import.meta.url).href
 let resizeObs = null
 function igualarAlturaFoto() {
   const tabla = document.querySelector('.congregaciones-box')

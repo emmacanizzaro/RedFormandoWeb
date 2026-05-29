@@ -1,12 +1,12 @@
 <template>
-  <section id="inicio" class="section hero">
-    <div class="section-inner">
-      <h1>REDFORMANDO</h1>
-      <p>
+  <section id="inicio" class="section hero hero-redformando">
+    <div class="section-inner hero-inner animate-fadein">
+      <h1 class="hero-title animate-slideup">REDFORMANDO</h1>
+      <p class="hero-sub animate-fadein-delay">
         Somos una Red, estamos en permanente Formación y creemos en una profunda Reforma en el
         Cuerpo de Cristo.
       </p>
-      <div class="bienal-highlight">
+      <div class="bienal-highlight animate-fadein-delay2">
         <h3>Cielo Nuevo y Tierra Nueva | Palabra Apostólica Bienal 2026-2027</h3>
         <p>
           Cielo Nuevo y Tierra Nueva implica que el cielo ha invadido la tierra y que la entrada de
@@ -14,7 +14,7 @@
         </p>
         <a
           id="bienal-link"
-          class="btn-strong btn-bienal-open"
+          class="btn-strong btn-bienal-open btn-hero"
           href="#"
           @click.prevent="showBienal = true"
           >VER MÁS</a
@@ -22,6 +22,7 @@
       </div>
       <BienalModal v-model="showBienal" />
     </div>
+    <div class="hero-bg"></div>
   </section>
   <div class="events-board-wrap" role="region" aria-label="Próximos eventos">
     <div class="events-board">
@@ -167,11 +168,11 @@
           {{ formFeedback }}
         </div>
         <label for="nombre">Nombre y Apellido</label>
-        <input id="nombre" name="nombre" type="text" v-model="form.nombre" required />
+        <input id="nombre" v-model="form.nombre" name="nombre" type="text" required />
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" v-model="form.email" required />
+        <input id="email" v-model="form.email" name="email" type="email" required />
         <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" rows="6" v-model="form.mensaje" required></textarea>
+        <textarea id="mensaje" v-model="form.mensaje" name="mensaje" rows="6" required></textarea>
         <button class="btn-strong" type="submit">ENVIAR</button>
       </form>
     </div>
@@ -183,6 +184,33 @@ import { ref } from 'vue'
 import InscripcionModal from './InscripcionModal.vue'
 import EventosBoard from './EventosBoard.vue'
 import BienalModal from './BienalModal.vue'
+
+import { useMeta } from '../plugins/meta.js'
+
+useMeta({
+  title: 'REDFORMANDO | Inicio',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Red de iglesias y obreros en permanente formación y reforma. Descubre nuestra visión, eventos, recursos y familia ministerial.',
+    },
+    { property: 'og:title', content: 'REDFORMANDO | Inicio' },
+    {
+      property: 'og:description',
+      content:
+        'Red de iglesias y obreros en permanente formación y reforma. Descubre nuestra visión, eventos, recursos y familia ministerial.',
+    },
+    { property: 'og:image', content: 'https://www.redformando.com/assets/images/Redformando.png' },
+    { name: 'twitter:title', content: 'REDFORMANDO | Inicio' },
+    {
+      name: 'twitter:description',
+      content:
+        'Red de iglesias y obreros en permanente formación y reforma. Descubre nuestra visión, eventos, recursos y familia ministerial.',
+    },
+    { name: 'twitter:image', content: 'https://www.redformando.com/assets/images/Redformando.png' },
+  ],
+})
 
 const showInscripcion = ref(false)
 const showBienal = ref(false)

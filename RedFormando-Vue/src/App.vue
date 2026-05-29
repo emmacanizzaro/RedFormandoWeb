@@ -14,8 +14,6 @@
 import { ref } from 'vue'
 import SiteHeader from './components/SiteHeader.vue'
 import SiteFooter from './components/SiteFooter.vue'
-import HomePage from './components/HomePage.vue'
-import HamburgerMenu from './components/HamburgerMenu.vue'
 import DonacionesModal from './components/DonacionesModal.vue'
 
 const showDonaciones = ref(false)

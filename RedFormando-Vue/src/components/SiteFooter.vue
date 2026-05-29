@@ -55,7 +55,7 @@
         <router-link
           class="btn-strong btn-donaciones"
           to="/#donaciones"
-          @click.native.prevent="$emit('open-donaciones')"
+          @click.prevent="$emit('open-donaciones')"
           >Donaciones</router-link
         >
         <p>REDFORMANDO | Familia Ministerial</p>
@@ -83,5 +83,5 @@
 </template>
 
 <script setup>
-// No lógica interna, solo emite evento para abrir donaciones
+const emit = defineEmits(['open-donaciones'])
 </script>

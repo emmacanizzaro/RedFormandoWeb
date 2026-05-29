@@ -12,8 +12,8 @@
     <span class="hamburger-bar"></span>
   </button>
   <div
-    class="menu-hamburguesa"
     id="menu-hamburguesa"
+    class="menu-hamburguesa"
     :class="{ open: isOpen }"
     :aria-hidden="(!isOpen).toString()"
   >
@@ -30,7 +30,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const isOpen = ref(false)
 
-function toggleMenu(e) {
+function toggleMenu() {
   isOpen.value = !isOpen.value
 }
 
