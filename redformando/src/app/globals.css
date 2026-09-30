@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Cormorant Garamond', serif;
+  --color-brand-blue: #172759;
+  --color-brand-blue-light: #1e3a8a;
+  --color-brand-teal: #1a776f;
+  --color-brand-teal-light: #0d9488;
+  --color-brand-copper: #c4977f;
+  --color-brand-copper-light: #d4a373;
+  --color-paper: #faf8f5;
+  --shadow-soft: 0 20px 60px rgba(23, 39, 89, 0.09);
+}
+
+:root {
+  color-scheme: light;
+  --background: #faf8f5;
+  --foreground: #172759;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(26, 119, 111, 0.08), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(196, 151, 127, 0.12), transparent 30%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(196, 151, 127, 0.35);
+  color: #172759;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(23, 39, 89, 0.08);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.card-resource {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card-resource:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 50px rgba(23, 39, 89, 0.12);
+}
+
+.hero-visual {
+  position: relative;
+}
+
+.hero-orb {
+  filter: blur(18px);
+}

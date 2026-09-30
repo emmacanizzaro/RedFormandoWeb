@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Open RedFormando app",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "cd /Users/emmanuelcanizzaro/Desktop/RedFormando\ Web/redformando && npm run dev",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}
