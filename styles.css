@@ -119,6 +119,12 @@
 .top-nav > .nav-link:not(:first-child) {
   display: none;
 }
+
+.is-unavailable {
+  cursor: not-allowed;
+  opacity: 0.58;
+  pointer-events: none;
+}
 /* Imagen de inscripción evento */
 .evento-inscripcion-img {
   object-fit: cover;
