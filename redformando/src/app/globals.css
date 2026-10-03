@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import 'tailwindcss';
 
+/* inline: las variables de next/font se definen en <body>, no en :root */
+@theme inline {
+  --font-sans: var(--font-montserrat), sans-serif;
+  --font-serif: var(--font-cormorant), serif;
+}
+
 @theme {
-  --font-sans: 'Montserrat', sans-serif;
-  --font-serif: 'Cormorant Garamond', serif;
   --color-brand-blue: #172759;
   --color-brand-blue-light: #1e3a8a;
   --color-brand-teal: #1a776f;
@@ -37,7 +40,7 @@ body {
     radial-gradient(circle at bottom right, rgba(196, 151, 127, 0.12), transparent 30%),
     var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-montserrat), sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
