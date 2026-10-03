@@ -112,9 +112,6 @@
     transform: translateY(0);
   }
 }
-.top-nav {
-  position: relative;
-}
 /* Siempre mostrar el menú hamburguesa, ocultar los otros links excepto INICIO */
 .top-nav > .nav-link:not(:first-child) {
   display: none;
@@ -172,6 +169,7 @@
   overflow-y: auto;
 }
 .inscripcion-detail-section .section-inner {
+  position: relative;
   width: min(980px, 100%);
   margin: 0 auto;
   background: #fff;
@@ -322,6 +320,7 @@ body.modal-open {
 }
 
 .top-nav {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -904,12 +903,6 @@ h2,
 .social-block a,
 .footer a,
 .course-card,
-.blog-card {
-  color: var(--ink);
-  font-weight: 700;
-  text-decoration: none;
-}
-
 .social-block a:hover,
 .footer a:hover {
   color: var(--brand-teal);
@@ -1025,6 +1018,8 @@ th {
   padding: 22px;
   display: flex;
   align-items: flex-end;
+  font-weight: 700;
+  text-decoration: none;
   background:
     linear-gradient(170deg, rgba(23, 39, 89, 0.94), rgba(26, 119, 111, 0.78)),
     url("assets/images/bg-blog.svg") center/cover;
@@ -1185,6 +1180,17 @@ th {
 
 .btn-strong:hover {
   background: var(--brand-blue);
+}
+
+.btn-strong.btn-full {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-strong.btn-cancel,
+.btn-strong.btn-cancel:hover {
+  background: #ccc;
+  color: #222;
 }
 
 .product-card .btn-strong {
