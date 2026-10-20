@@ -19,9 +19,9 @@ window.RED_CONFIG = {
 
   courses: {
     webinarForm: "https://www.instagram.com/webinar_redformando/",
-    webinarImage: "assets/images/webinar.png",
+    webinarImage: "assets/images/Webinar.webp",
     edmiForm: "https://www.instagram.com/edm.internacional/",
-    edmiImage: "assets/images/edmi.png",
+    edmiImage: "assets/images/EDMI.webp",
   },
 
   checkout: {
@@ -37,7 +37,7 @@ window.RED_CONFIG = {
 
   bienal: {
     verMasLink: "#bienal-detalle",
-    imageUrl: "assets/images/CNTN.png",
+    imageUrl: "assets/images/CNTN.webp",
     videoUrl:
       "https://youtube.com/watch?v=ltjMOEm246s&embeds_referring_euri=https%3A%2F%2Fwww.redformando.com%2F&source_ve_path=Mjg2NjY",
     pdfUrl: "#",
@@ -48,7 +48,7 @@ window.RED_CONFIG = {
     items: [
       {
         note: "Encuentro RedFormando 2026",
-        image: "assets/images/Encuentro RedFormando.png",
+        image: "assets/images/Encuentro RedFormando.webp",
         alt: "Banner Encuentro RedFormando",
         ctaLabel: "Reservá tu lugar",
         ctaLink: "#inscripcion-evento",
