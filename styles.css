@@ -20,20 +20,6 @@
 .inscripcion-detail-section .modal-close:hover {
   background: #e0e0e0;
 }
-/* Overlay oscuro para menú hamburguesa */
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 20, 30, 0.55);
-  z-index: 90;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s;
-}
-.menu-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
 /* === HAMBURGUESA === */
 .hamburger {
   display: flex;
@@ -112,9 +98,6 @@
     transform: translateY(0);
   }
 }
-.top-nav {
-  position: relative;
-}
 /* Siempre mostrar el menú hamburguesa, ocultar los otros links excepto INICIO */
 .top-nav > .nav-link:not(:first-child) {
   display: none;
@@ -172,48 +155,12 @@
   overflow-y: auto;
 }
 .inscripcion-detail-section .section-inner {
+  position: relative;
   width: min(980px, 100%);
   margin: 0 auto;
   background: #fff;
 }
-.modal-overlay.is-open .modal-content {
-  animation: donationReveal 0.35s ease;
-}
 /* === MODAL INSCRIPCIÓN EVENTO === */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 20, 30, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: opacity 0.2s;
-}
-
-.modal-content {
-  position: relative;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-  max-width: 540px;
-  width: 100%;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 38px 28px 28px 28px;
-}
-
-.modal-img {
-  max-width: 100%;
-  max-height: 320px;
-  border-radius: 12px;
-  display: block;
-  margin: 0 auto 12px auto;
-}
-
 .modal-close {
   position: absolute;
   top: 10px;
@@ -237,16 +184,6 @@
   background: #e0e0e0;
 }
 
-@media (max-width: 600px) {
-  .modal-content {
-    max-width: 98vw;
-    max-height: 98vh;
-  }
-  .modal-img {
-    max-width: 98vw;
-    max-height: 70vh;
-  }
-}
 :root {
   --ink: #200e32;
   --ink-soft: #3f2e51;
@@ -322,6 +259,7 @@ body.modal-open {
 }
 
 .top-nav {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -773,7 +711,8 @@ h1 {
   font-weight: 900;
 }
 
-h2 {
+h2,
+.page-title {
   font-size: clamp(1.5rem, 3vw, 2.3rem);
   font-weight: 900;
   margin-bottom: 20px;
@@ -903,12 +842,6 @@ h2 {
 .social-block a,
 .footer a,
 .course-card,
-.blog-card {
-  color: var(--ink);
-  font-weight: 700;
-  text-decoration: none;
-}
-
 .social-block a:hover,
 .footer a:hover {
   color: var(--brand-teal);
@@ -1024,6 +957,8 @@ th {
   padding: 22px;
   display: flex;
   align-items: flex-end;
+  font-weight: 700;
+  text-decoration: none;
   background:
     linear-gradient(170deg, rgba(23, 39, 89, 0.94), rgba(26, 119, 111, 0.78)),
     url("assets/images/bg-blog.svg") center/cover;
@@ -1186,6 +1121,17 @@ th {
   background: var(--brand-blue);
 }
 
+.btn-strong.btn-full {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-strong.btn-cancel,
+.btn-strong.btn-cancel:hover {
+  background: #ccc;
+  color: #222;
+}
+
 .product-card .btn-strong {
   width: 100%;
   text-align: center;
@@ -1195,35 +1141,6 @@ th {
 
 .product-card .btn-strong:hover {
   background: #186da4;
-}
-
-.external-sections {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
-  gap: 12px;
-  align-items: center;
-}
-
-.external-sections h2 {
-  grid-column: 1 / -1;
-  margin-bottom: 8px;
-}
-
-.external-card {
-  display: grid;
-  place-items: center;
-  min-height: 92px;
-  border-radius: 14px;
-  background: linear-gradient(
-    145deg,
-    rgba(23, 39, 89, 0.9),
-    rgba(26, 119, 111, 0.72)
-  );
-  color: #fff;
-  text-decoration: none;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  box-shadow: var(--shadow);
 }
 
 .contacto-grid {
@@ -1526,8 +1443,7 @@ th {
   gap: 8px;
 }
 
-.checkout-actions .btn-strong,
-.checkout-pay-link {
+.checkout-actions .btn-strong {
   width: 100%;
   text-align: center;
   text-decoration: none;
@@ -1573,13 +1489,6 @@ th {
   gap: 10px;
   align-content: start;
   justify-items: center;
-}
-
-.footer-brand-text {
-  margin: 0;
-  max-width: 320px;
-  opacity: 0.92;
-  font-size: 0.92rem;
 }
 
 .footer-social-pills {
@@ -1695,14 +1604,6 @@ th {
   background: #2a8ec8;
 }
 
-.footer-copy {
-  margin: 0;
-  padding: 10px 16px 18px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.82rem;
-}
-
 @media (max-width: 1080px) {
   .content {
     width: min(920px, calc(100% - 24px));
@@ -1724,7 +1625,6 @@ th {
 
   .two-col,
   .courses-grid,
-  .external-sections,
   .donation-grid,
   .download-boxes,
   .events-grid {
